@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+		<title>Chronometre</title>
+        <style>
+            html{
+                width:100%;
+                height: 100%;
+                background: #444;
+                margin: 0;
+                padding: 0;
+                -webkit-box-shadow: inset 0px 0px 33px 1px rgba(0,0,0,0.75);
+                -moz-box-shadow: inset 0px 0px 33px 1px rgba(0,0,0,0.75);
+                box-shadow: inset 0px 0px 33px 1px rgba(0,0,0,0.75);
+            }
+
+            body{
+                width: 60%;
+                margin: auto;
+                background: #ddd;
+                border: 3px solid #aaa;
+                border-radius: 8px;
+                padding: 0;
+            }
+
+            *{
+                box-sizing: border-box;
+            }
+
+            #watch,#chrono{
+                text-align:center;
+                font-size:80px;
+                background: #fff;
+                border: 3px solid #aaa;
+                border-radius:8px ;
+                font-weight: bold;
+                width: 95%;
+                margin: auto;
+                margin-top:4px ;
+            }
+
+            table{
+                border-collapse: collapse;
+                width: 95%;
+                margin: auto;
+                margin-top:4px ;
+            }
+
+
+            #clear,#start{
+                text-align: center;
+                font-weight: bold;
+                font-size: 42px;
+                font-family: "Comic Sans MS";
+                margin: 0;
+                height: 80px;
+                cursor: pointer;
+                border: none;
+            }
+
+            #start{
+                background: rgba(73,184,63,1);
+                background: -moz-linear-gradient(top, rgba(73,184,63,1) 0%, rgba(73,184,63,1) 22%, rgba(31,59,8,1) 78%, rgba(31,59,8,1) 100%);
+                background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(73,184,63,1)), color-stop(22%, rgba(73,184,63,1)), color-stop(78%, rgba(31,59,8,1)), color-stop(100%, rgba(31,59,8,1)));
+                background: -webkit-linear-gradient(top, rgba(73,184,63,1) 0%, rgba(73,184,63,1) 22%, rgba(31,59,8,1) 78%, rgba(31,59,8,1) 100%);
+                background: -o-linear-gradient(top, rgba(73,184,63,1) 0%, rgba(73,184,63,1) 22%, rgba(31,59,8,1) 78%, rgba(31,59,8,1) 100%);
+                background: -ms-linear-gradient(top, rgba(73,184,63,1) 0%, rgba(73,184,63,1) 22%, rgba(31,59,8,1) 78%, rgba(31,59,8,1) 100%);
+                background: linear-gradient(to bottom, rgba(73,184,63,1) 0%, rgba(73,184,63,1) 22%, rgba(31,59,8,1) 78%, rgba(31,59,8,1) 100%);
+                border-right: 1.5px solid #aaaaaa;
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+            }
+
+            #start:hover{
+                background: rgba(31,59,8,1);
+                background: -moz-linear-gradient(top, rgba(31,59,8,1) 0%, rgba(31,59,8,1) 22%, rgba(73,184,63,1) 78%, rgba(73,184,63,1) 100%);
+                background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(31,59,8,1)), color-stop(22%, rgba(31,59,8,1)), color-stop(78%, rgba(73,184,63,1)), color-stop(100%, rgba(73,184,63,1)));
+                background: -webkit-linear-gradient(top, rgba(31,59,8,1) 0%, rgba(31,59,8,1) 22%, rgba(73,184,63,1) 78%, rgba(73,184,63,1) 100%);
+                background: -o-linear-gradient(top, rgba(31,59,8,1) 0%, rgba(31,59,8,1) 22%, rgba(73,184,63,1) 78%, rgba(73,184,63,1) 100%);
+                background: -ms-linear-gradient(top, rgba(31,59,8,1) 0%, rgba(31,59,8,1) 22%, rgba(73,184,63,1) 78%, rgba(73,184,63,1) 100%);
+                background: linear-gradient(to bottom, rgba(31,59,8,1) 0%, rgba(31,59,8,1) 22%, rgba(73,184,63,1) 78%, rgba(73,184,63,1) 100%);
+            }
+
+            #clear{
+                border-left: 1.5px solid #aaaaaa;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                background: rgba(168,105,96,1);
+                background: -moz-linear-gradient(top, rgba(168,105,96,1) 0%, rgba(168,105,96,1) 22%, rgba(181,13,24,1) 78%, rgba(181,13,24,1) 100%);
+                background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(168,105,96,1)), color-stop(22%, rgba(168,105,96,1)), color-stop(78%, rgba(181,13,24,1)), color-stop(100%, rgba(181,13,24,1)));
+                background: -webkit-linear-gradient(top, rgba(168,105,96,1) 0%, rgba(168,105,96,1) 22%, rgba(181,13,24,1) 78%, rgba(181,13,24,1) 100%);
+                background: -o-linear-gradient(top, rgba(168,105,96,1) 0%, rgba(168,105,96,1) 22%, rgba(181,13,24,1) 78%, rgba(181,13,24,1) 100%);
+                background: -ms-linear-gradient(top, rgba(168,105,96,1) 0%, rgba(168,105,96,1) 22%, rgba(181,13,24,1) 78%, rgba(181,13,24,1) 100%);
+                background: linear-gradient(to bottom, rgba(168,105,96,1) 0%, rgba(168,105,96,1) 22%, rgba(181,13,24,1) 78%, rgba(181,13,24,1) 100%);
+
+            }
+
+            #clear:hover{
+                background: rgba(181,13,24,1);
+                background: -moz-linear-gradient(top, rgba(181,13,24,1) 0%, rgba(181,13,24,1) 22%, rgba(168,105,96,1) 78%, rgba(168,105,96,1) 100%);
+                background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(181,13,24,1)), color-stop(22%, rgba(181,13,24,1)), color-stop(78%, rgba(168,105,96,1)), color-stop(100%, rgba(168,105,96,1)));
+                background: -webkit-linear-gradient(top, rgba(181,13,24,1) 0%, rgba(181,13,24,1) 22%, rgba(168,105,96,1) 78%, rgba(168,105,96,1) 100%);
+                background: -o-linear-gradient(top, rgba(181,13,24,1) 0%, rgba(181,13,24,1) 22%, rgba(168,105,96,1) 78%, rgba(168,105,96,1) 100%);
+                background: -ms-linear-gradient(top, rgba(181,13,24,1) 0%, rgba(181,13,24,1) 22%, rgba(168,105,96,1) 78%, rgba(168,105,96,1) 100%);
+                background: linear-gradient(to bottom, rgba(181,13,24,1) 0%, rgba(181,13,24,1) 22%, rgba(168,105,96,1) 78%, rgba(168,105,96,1) 100%);
+            }
+
+
+
+            #add{
+                background: #ddd;
+                border: 3px solid #aaaaaa;
+                box-shadow: 0px 0px 20px #333;
+                border-radius: 8px;
+                cursor: pointer;
+                width: 125px;
+            }
+
+            #add:hover{
+                background: #eee;
+            }
+
+            #interval{
+                border: 1px solid #444444;
+                background: #bbb;
+                margin-bottom: 4px;
+            }
+
+            #interval td{
+                height: 30px;
+                font-size: 18px;
+                border:1px solid #444444;
+            }
+
+            #interval td:hover{
+                background: #eee;
+            }
+
+            #windows{
+                position: absolute;
+                left:5%;
+                top:0;
+                z-index: 10000;
+                width: 90%;
+                background: #dddddd;
+                border:5px solid #aaa;
+                border-radius: 8px;
+                text-align: center;
+                display: none;
+            }
+
+            #windows > p{
+                font-weight: bold;
+            }
+
+            #windows > table{
+                width: 60%;
+                border-collapse: separate;
+            }
+
+            #windows > table > tbody > tr > td{
+                width: 10%;
+                background: darkgreen;
+                box-shadow: 0px 0px 10px #333;
+                cursor: pointer;
+                border-radius: 8px;
+            }
+
+            #windows > table > tbody > tr > td:hover{
+                background: limegreen;
+            }
+
+            #windows > #close{
+                float: right;
+                background: red;
+                border: 1px solid #fff;
+                cursor: pointer;
+                box-shadow: inset 0px 0px 6px #333;
+                width: 20px;
+                border-top-right-radius: 3px;
+                color:#eee;
+            }
+
+            #windows > #close:hover{
+                background: lightsalmon;
+                color:#333;
+            }
+
+        </style>
+    </head>
+    <body>
+        <p id="watch"></p>
+        <table>
+            <tr>
+                <td id="start" onclick="countChrono()">
+                    START
+                </td>
+                <td id="clear" onclick="clearWatch()">
+                    CLEAR
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <tr>
+                <th id="add" onclick="showWindows()">+Add interval</th>
+                <td> </td>
+            </tr>
+        </table>
+        <table id="interval">
+        </table>
+        <div id="windows">
+            <i id="close" onclick="hideWindows()">X</i>
+            <p>Add New Interval</p>
+            <p id="chrono"></p>
+            <table>
+                <tr>
+                    <td onclick="createIntervalle(0)">0</td>
+                    <td onclick="createIntervalle(1)">1</td>
+                    <td onclick="createIntervalle(2)">2</td>
+                    <td onclick="createIntervalle(3)">3</td>
+                    <td onclick="createIntervalle(4)">4</td>
+                    <td onclick="clearclock()">CLEAR</td>
+                </tr>
+                <tr>
+                    <td onclick="createIntervalle(5)">5</td>
+                    <td onclick="createIntervalle(6)">6</td>
+                    <td onclick="createIntervalle(7)">7</td>
+                    <td onclick="createIntervalle(8)">8</td>
+                    <td onclick="createIntervalle(9)">9</td>
+                    <td onclick="addIntervalle()">ADD</td>
+                </tr>
+            </table>
+        </div>
+        <script>
+
+            function afficheNumero(chiffre){
+                if (chiffre<10)
+                        chiffre = "0" + chiffre;
+                return chiffre;
+            }
+
+            function compteur(temps){
+                var res = "";
+
+                if(temps/3600 >= 1){
+                    var heur = temps/3600;
+                    res = afficheNumero(Math.floor(heur)) + ":";
+                    //console.log(heur);
+                    if((temps % 3600) /60 >= 1){
+                        var minute = temps % 3600;
+                        //console.log(minute);
+                        res += afficheNumero(Math.floor(minute /60))
+                                + ":" + afficheNumero(Math.floor(minute % 60));
+                    }
+                    else {
+                        res += "00:"+afficheNumero(temps % 3600);
+                    }
+                }
+                else {
+                    if(temps/3600 < 1 && temps/60 >= 1){
+                        res= "00:"+afficheNumero(Math.floor(temps/60))
+                                + ":" + afficheNumero(Math.floor(temps % 60));
+                    }
+                    else {
+                        res= "00:00:"+afficheNumero(temps);
+                    }
+                }
+
+                return res;
+            }
+
+            function  lanceCompteur(){
+                var temp = new Array();
+                var str = "";
+                var sec,min,heure,temps =0;
+                str = document.getElementById("watch").innerHTML;
+                temp = str.split(":");
+
+                sec = parseInt(temp[2]);
+                min = parseInt(temp[1])*60;
+                heure = parseInt(temp[0])*3600;
+                temps = sec + min + heure - 1;
+
+                if(temps < 0){
+                    clearWatch();
+                    document.getElementById("watch").style.borderColor ="red";
+                    alert("Timeout!");
+                }
+                else {
+                    document.getElementById("watch").innerHTML  = compteur(temps);
+                }
+
+            }
+
+            function countChrono(){
+                clearWatch();
+                var table = document.getElementById("interval");
+                var tbody = table.getElementsByTagName("tbody")[0];
+                var tr = tbody.getElementsByTagName("tr")[0];
+                var str = tr.getElementsByTagName("td")[0].innerHTML;
+                document.getElementById("watch").innerHTML = str;
+                //console.log(str);
+                time = setInterval(function(){ lanceCompteur() }, 1000);
+            }
+
+            function clearclock(){
+                document.getElementById("chrono").innerHTML= "00:00:00";
+            }
+
+            function clearWatch(){
+				document.getElementById("watch").style.borderColor ="#aaa";
+                document.getElementById("watch").innerHTML= "00:00:00";
+				clearInterval(time);
+            }
+
+
+            function showWindows(){
+                document.getElementById("windows").style.display = "block";
+            }
+
+            function hideWindows(){
+                document.getElementById("windows").style.display= "none";
+            }
+
+            function createIntervalle(chiffre){
+
+                var str = document.getElementById("chrono").innerHTML;
+                var temp = new Array();
+
+                str = str.replace(/:/g,"");
+                temp = str.split("");
+
+                var res = "";
+                var size = temp.length-1;
+
+                for(var i =size;i > -1;i--){
+
+                    if(i == 1 || i == 3){
+                        res = temp[i+1] + ":" + res;
+                        //console.log(res);
+                    }
+
+                    else{
+                        if( i == size)
+                            res = chiffre;
+                        else{
+                            res = temp[i+1] + res;
+                            //console.log(res);
+
+                        }
+                    }
+                }
+                document.getElementById("chrono").innerHTML = res;
+            }
+
+            function addIntervalle(){
+
+                document.getElementById("interval").innerHTML = document.getElementById("interval").innerHTML +
+                        "<tbody id='close"+ interval +"'><tr><td onclick='closeIntervalle("+ interval +")'>"
+                        + document.getElementById("chrono").innerHTML + "</td></tr></tbody>";
+                interval++;
+                clearclock();
+            }
+
+            function closeIntervalle(numero){
+                var elment = document.getElementById("close"+numero);
+                elment.parentNode.removeChild(elment);
+            }
+
+            function initialisation(){
+                clearclock();
+                clearWatch();
+            }
+
+            initialisation();
+            var interval = 0;
+            var time = 0;
+
+        </script>
+    </body>
+</html>
+
