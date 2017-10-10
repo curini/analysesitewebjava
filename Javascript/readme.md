@@ -1,8 +1,8 @@
-#chronomètre
+# chronomètre
 
 * Description: chronomètre réalisé en JavaScript
 
-##Aperçu du compteur
+## Aperçu du compteur
 
 ![image sous navigateur](Capture.PNG?raw=true )
 
