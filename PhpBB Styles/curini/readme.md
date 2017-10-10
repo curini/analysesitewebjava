@@ -1,8 +1,8 @@
-#Style PhpBB
+# Style PhpBB
 
 * Auteur : Benjamin
 * Description: Style pour PhpBB
 
-##Aperçu du style
+## Aperçu du style
 
 ![image sous navigateur](Capture0.PNG?raw=true )
